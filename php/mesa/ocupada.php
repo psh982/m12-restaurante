@@ -1,29 +1,59 @@
 <?php
-include_once("../connection.php");
-
-$id_mesa = $_POST['id'];
-$sql = "SELECT estado_mesa FROM tbl_mesas me INNER JOIN tbl_estado es ON me.id_mesa = es.id_estado WHERE me.id_mesa = ?";
-$stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "i", $idMesa); // "i" indica que esperamos un parámetro de tipo entero
-mysqli_stmt_execute($stmt);
-$resultselect = mysqli_stmt_get_result($stmt);
-$selectrow = mysqli_fetch_assoc($resultselect);
-if ($selectrow['estado_mesa'] == "Ocupado") {
-    // Obtener la fecha y hora actual
-    $fechaSalida = date("Y-m-d H:i:s");
-    // Actualizar el estado y la fecha de salida en la base de datos
-    $sqllibre = "UPDATE mesas SET estado = 'libre', fecha_salida = '$fechaSalida' WHERE id = $idMesa";
-    $stmtlibre = mysqli_prepare($conn, $sqllibre);
-    mysqli_stmt_bind_param($stmtlibre, "i", $idMesa);
-    mysqli_stmt_execute($stmtlibre);
-} else {
-    $fechaEntrada = date("Y-m-d H:i:s");
-    // Actualizar el estado y la fecha de entrada en la base de datos
-    $sqlocupa = "UPDATE mesas SET estado = 'ocupada', fecha_entrada = '$fechaEntrada' WHERE id = $idMesa";
-    $stmtocupa = mysqli_prepare($conn, $sqlocupa);
-    mysqli_stmt_bind_param($stmtocupa, "i", $idMesa);
-    mysqli_stmt_execute($stmtocupa);
+session_start();
+include '../connection.php';
+if (!isset($_SESSION["user"])) {
+    header('Location: ./cerrar.php');
+    exit();
 }
 
+// Asegúrate de que el parámetro 'id' está definido
+if(isset($_GET['id_mesa'])) {
+    $idMesa = $_GET['id_mesa'];
+    // Consulta para obtener el estado actual de la mesa
+    $sqlSelect = "SELECT me.id_sala_mesa, me.id_camarero ,es.estado_nombre as estado_mesa FROM tbl_mesas me INNER JOIN tbl_estado es ON me.id_estado_mesa = es.id_estado WHERE me.id_mesa = ?;";
+    $stmtSelect = mysqli_prepare($conn, $sqlSelect);
+    mysqli_stmt_bind_param($stmtSelect, "i", $idMesa);
+    mysqli_stmt_execute($stmtSelect);
+    $resultSelect = mysqli_stmt_get_result($stmtSelect);
+    $selectRow = mysqli_fetch_assoc($resultSelect);
+    try {
+    // Desactivamos la autoejecución de consultas
+    mysqli_autocommit($conn,false);
+    // Iniciamos la transacción
+    mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
+    // Insertar en la tabla de historial
+    $sqlInsertHistorial = "INSERT INTO tbl_historial (id_usuario, id_mesa, id_sala) VALUES (?, ?, ?)";
+    $stmtInsertHistorial = mysqli_prepare($conn, $sqlInsertHistorial);
+    mysqli_stmt_bind_param($stmtInsertHistorial, "iii", $_SESSION['id_user'], $idMesa, $selectRow['id_sala_mesa']);
+    mysqli_stmt_execute($stmtInsertHistorial);
+    // Verifica el estado actual de la mesa
+    if ($selectRow['estado_mesa'] == "Ocupado") {
+        // Actualizar el estado y la fecha de salida en la base de datos
+        $sqlLibre = "UPDATE tbl_mesas SET id_estado_mesa = (SELECT id_estado FROM tbl_estado WHERE estado_nombre = 'Libre'), id_camarero = NULL WHERE id_mesa = ?";
+        $stmtLibre = mysqli_prepare($conn, $sqlLibre);
+        mysqli_stmt_bind_param($stmtLibre, "i", $idMesa);
+        mysqli_stmt_execute($stmtLibre);
+    } else {
+        // Actualizar el estado, la fecha de entrada y asignar el id_camarero en la base de datos
+        $sqlOcupa = "UPDATE tbl_mesas SET id_estado_mesa = (SELECT id_estado FROM tbl_estado WHERE estado_nombre = 'Ocupado'), id_camarero = ? WHERE id_mesa = ?";
+        $stmtOcupa = mysqli_prepare($conn, $sqlOcupa);
+        mysqli_stmt_bind_param($stmtOcupa, "ii", $_SESSION['id_user'], $idMesa);
+        mysqli_stmt_execute($stmtOcupa);
+    }
+    
+    // Commit de la transacción
+    mysqli_commit($conn);
+    
+    } catch (Exception $e) {
+        // En caso de error, realizar un rollback
+        echo "Error: ". $e->getMessage()."<br>";
+        mysqli_rollback($conn);
+    }
+} else {
+    // Manejar el caso en el que 'id' no está definido o no es un número entero
+    echo "Error: El parámetro 'id' no está definido o no es un número entero.";
+}
 
+// Cerrar la conexión a la base de datos
+mysqli_close($conn);
 ?>

@@ -83,7 +83,6 @@ CREATE TABLE tbl_historial(
     id_mesa INT NOT NULL,
     id_sala INT NOT NULL,
     fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    dia DATE,
     FOREIGN KEY (id_usuario) REFERENCES tbl_users(id_user),
     FOREIGN KEY (id_mesa) REFERENCES tbl_mesas(id_mesa),
     FOREIGN KEY (id_sala) REFERENCES tbl_salas(id_sala)
