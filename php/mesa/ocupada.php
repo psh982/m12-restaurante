@@ -12,11 +12,17 @@ if ($selectrow['estado_mesa'] == "Ocupado") {
     // Obtener la fecha y hora actual
     $fechaSalida = date("Y-m-d H:i:s");
     // Actualizar el estado y la fecha de salida en la base de datos
-    $sql = "UPDATE mesas SET estado = 'libre', fecha_salida = '$fechaSalida' WHERE id = $idMesa";
+    $sqllibre = "UPDATE mesas SET estado = 'libre', fecha_salida = '$fechaSalida' WHERE id = $idMesa";
+    $stmtlibre = mysqli_prepare($conn, $sqllibre);
+    mysqli_stmt_bind_param($stmtlibre, "i", $idMesa);
+    mysqli_stmt_execute($stmtlibre);
 } else {
     $fechaEntrada = date("Y-m-d H:i:s");
     // Actualizar el estado y la fecha de entrada en la base de datos
-    $sql = "UPDATE mesas SET estado = 'ocupada', fecha_entrada = '$fechaEntrada' WHERE id = $idMesa";
+    $sqlocupa = "UPDATE mesas SET estado = 'ocupada', fecha_entrada = '$fechaEntrada' WHERE id = $idMesa";
+    $stmtocupa = mysqli_prepare($conn, $sqlocupa);
+    mysqli_stmt_bind_param($stmtocupa, "i", $idMesa);
+    mysqli_stmt_execute($stmtocupa);
 }
 
 
