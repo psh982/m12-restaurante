@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Límite de Caracteres en JavaScript</title>
+    <style>
+        .bordes {
+            border: 2px solid red;
+        }
+    </style>
+    <script>
+        function limitarLongitud(element, maxLength) {
+            if (element.value.length > maxLength) {
+                element.value = element.value.slice(0, maxLength);
+            }
+        }
+
+        function validarFormulario() {
+            var user = document.getElementById("textInput").value;
+            var userNO = document.getElementById("userNo");
+            var userBor = document.getElementById("textInput");
+            var contra = document.getElementById("passwordInput").value;
+            var contraNO = document.getElementById("contraNo");
+            var contraBor = document.getElementById("passwordInput");
+
+            userBor.classList.remove("bordes");
+            contraBor.classList.remove("bordes");
+
+            contraNO.textContent = '';
+            userNO.textContent = '';
+
+            var validar = true;
+
+            if (user === '') {
+                userNO.textContent = "El campo de usuario debe estar lleno";
+                userBor.classList.add("bordes");
+                validar = false;
+            }
+
+            if (contra === '') {
+                contraNO.textContent = "El campo de contraseña debe estar lleno";
+                contraBor.classList.add("bordes");
+                validar = false;
+            }
+
+            return validar;
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Formulario</h2>
+
+    <form onsubmit="return validarFormulario()">
+        <label for="textInput">Usuario:</label>
+        <input type="text" id="textInput" name="textInput" oninput="limitarLongitud(this, 20)">
+        <p id="userNo" style="color: red;"></p>
+
+        <label for="passwordInput">Contraseña:</label>
+        <input type="password" id="passwordInput" name="passwordInput" oninput="limitarLongitud(this, 15)">
+        <p id="contraNo" style="color: red;"></p>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</body>
+</html>
