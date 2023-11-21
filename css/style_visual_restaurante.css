@@ -13,10 +13,10 @@
   }
 
   .titulo-restaurante {
-        padding: 10px;
+    padding: 10px;
   }
 
-.mesa {
+  .mesa {
     position: relative;
     width: 160px;
     height: 160px;
@@ -32,32 +32,15 @@
     display: flex;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 15px; /* Añadir margen para separar las mesas */
-    transition: background-color 0.3s ease;
-}
-
-.mesa:hover {
-    background-color: #8c6d6d; /* Cambiar color al pasar el ratón */
-}
-
-  .boton-redondo {
-    position: absolute;
-    top: calc(0% + 7px);
-    left: calc(0% + 5px);
-    margin-left: 5px;
-    margin-top: 5px;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+    margin: 15px;
   }
 
   .tipo-mesa {
     position: absolute;
     top: calc(0% + 7px);
-    left: calc(100% - 70px);
+    left: calc(100% - 60px);
     color: #000000;
-    font-size: 40px;
+    font-size: 45px;
     text-decoration: none;
   }
 
@@ -68,14 +51,6 @@
     color: #000000;
     font-size: 16px;
     text-decoration: none;
-  }
-
-  .btn-success {
-    --bs-btn-color: #198754;
-    --bs-btn-hover-color: #4bd997;
-    --bs-btn-active-color: #4bd997;
-    --bs-btn-disabled-color: #4bd997;
-
   }
 
   .container-mapa-mesas {
@@ -95,13 +70,8 @@
   }
 
   /* ESTILO FILTROS */
-  .container-dropdown {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-  }
 
-  .container-dropdown {
+  .formulario-filtros {
     display: flex;
     align-items: center;
     background-color: #fff;
@@ -146,4 +116,40 @@
 
   .btn-enviar:hover {
     background-color: #45a049;
+  }
+
+  /* BOTÓN OCUPACIÓN */
+  .circulo-desocupada {
+    position: absolute;
+    top: calc(0% + 15px);
+    left: calc(0% + 15px);
+    width: 48px;
+    height: 48px;
+    background-color: #57ce2c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Agrega una transición para suavizar el cambio de color */
+  }
+
+  .circulo-desocupada:hover {
+    background-color: rgb(21, 114, 13);
+    /* Cambia el color al pasar el ratón sobre el botón */
+  }
+
+  .circulo-ocupada {
+    position: absolute;
+    top: calc(0% + 15px);
+    left: calc(0% + 15px);
+    width: 48px;
+    height: 48px;
+    background-color: #ce422c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .circulo-ocupada:hover {
+    background-color: #852b1e;
+    /* Cambia el color al pasar el ratón sobre el botón */
   }
