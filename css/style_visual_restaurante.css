@@ -1,0 +1,155 @@
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  #mapa {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Puedes ajustar el número de columnas según tus necesidades */
+    gap: 20px;
+    margin: 20px;
+  }
+
+  .titulo-restaurante {
+    padding: 10px;
+  }
+
+  .mesa {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    background-color: #c9acac;
+    border: 3px solid #563d3d;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+  }
+
+  .tipo-mesa {
+    position: absolute;
+    top: calc(0% + 7px);
+    left: calc(100% - 60px);
+    color: #000000;
+    font-size: 45px;
+    text-decoration: none;
+  }
+
+  .nombre-mesa {
+    position: absolute;
+    top: calc(100% - 40px);
+    left: calc(100% - 145px);
+    color: #000000;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .container-mapa-mesas {
+    display: flex;
+    align-items: center;
+    background-color: #d8d4d4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ESTILO FILTROS */
+
+  .formulario-filtros {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .dropdown {
+    margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  label {
+    display: flex;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .btn-enviar {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-enviar:hover {
+    background-color: #45a049;
+  }
+
+  /* BOTÓN OCUPACIÓN */
+  .circulo-desocupada {
+    position: absolute;
+    top: calc(0% + 15px);
+    left: calc(0% + 15px);
+    width: 48px;
+    height: 48px;
+    background-color: #57ce2c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Agrega una transición para suavizar el cambio de color */
+  }
+
+  .circulo-desocupada:hover {
+    background-color: rgb(21, 114, 13);
+    /* Cambia el color al pasar el ratón sobre el botón */
+  }
+
+  .circulo-ocupada {
+    position: absolute;
+    top: calc(0% + 15px);
+    left: calc(0% + 15px);
+    width: 48px;
+    height: 48px;
+    background-color: #ce422c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .circulo-ocupada:hover {
+    background-color: #852b1e;
+    /* Cambia el color al pasar el ratón sobre el botón */
+  }
