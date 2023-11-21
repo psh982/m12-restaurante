@@ -20,6 +20,7 @@ include("./connection.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Mapa de Mesas - Restaurante</title>
     <script>
         function seleccionarMesa(numeroMesa) {
@@ -45,71 +46,45 @@ include("./connection.php");
     <!-- Contenedor filtros -->
     <?php
     ?>
-    
     <div class="container-dropdown">
       <div class="dropdown">
         <!-- EJEMPLO PARA PODER VER COMO QUEDARÍA-->
-        <form class="formulario-filtros" action="./home.php" method="get">
-          <div class="dropdown">
-            <label for="dropdown1">Sala</label>
-            <select id="dropdown1" name="sala" value="<?php if (isset($_GET['sala'])) { echo $_GET['sala']; } else { echo $id_tipos; } ?>">
-              <option value="">Seleccione una sala</option>
-              <?php
-                $sql_tipos_salas = "SELECT id_tipos, nombre_tipos, aforo FROM tbl_tipos_salas";
-                $stmt_tipos_salas = mysqli_stmt_init($conn);
-                mysqli_stmt_prepare($stmt_tipos_salas, $sql_tipos_salas);
-                mysqli_stmt_execute($stmt_tipos_salas);
-                $result_tipos_sala = mysqli_stmt_get_result($stmt_tipos_salas);
+        <form class="formulario-filtros" action="./home.php" method="get" id="nocargar">
+        <div class="dropdown">
+        <label for="dropdown1">Sala</label>
+        <!-- Selector para sala -->
+        <select id="dropdown1" name="sala">
+          <option value="">Seleccione una sala</option>
+          <?php
+            $sql_tipos_salas = "SELECT id_tipos, nombre_tipos, aforo FROM tbl_tipos_salas";
+            $stmt_tipos_salas = mysqli_stmt_init($conn);
+            mysqli_stmt_prepare($stmt_tipos_salas, $sql_tipos_salas);
+            mysqli_stmt_execute($stmt_tipos_salas);
+            $result_tipos_sala = mysqli_stmt_get_result($stmt_tipos_salas);
 
-                if (mysqli_num_rows($result_tipos_sala) == 0) {
-                  mysqli_close($conn);
-                  echo "No";
-                }
-              foreach ($result_tipos_sala as $row) {
-                $nombre_tipos = $row['nombre_tipos'];
-                $id_tipos = $row['id_tipos'];
-                ?> <option> <?php echo $nombre_tipos ?> </option>;
-            <?php
-              }
-            ?>
-            </select>
-          </div>
-          <button type="submit">Enviar</button>
-          </form>
+            if (mysqli_num_rows($result_tipos_sala) == 0) {
+              mysqli_close($conn);
+              echo "No";
+            }
+
+            foreach ($result_tipos_sala as $row) {
+              $nombre_tipos = $row['nombre_tipos'];
+              $id_tipos = $row['id_tipos'];
+              $selected = ($_GET['sala'] == $nombre_tipos) ? 'selected' : '';
+          ?>
+          <option value="<?php echo $nombre_tipos ?>" <?php echo $selected ?>><?php echo $nombre_tipos ?></option>
+          <?php
+            }
+          ?>
+        </select>
+        <!-- Acaba el selector para sala -->
+        </div>
         <div class="dropdown">
           <label for="dropdown2">Num. Sala</label>
-          <select id="dropdown2">
+          <select id="dropdown2" name="num_sala">
             <option value="">Seleccione un número</option>
-            <?php
-            // try {
-            //   /* Consulta para listar las notas del alumno */
-            //   $sql_salas = "SELECT TS.nombre_tipos AS tipo_sala, S.nombre_sala, TS.aforo AS sillas FROM tbl_salas S JOIN tbl_tipos_salas TS ON S.id_tipos_sala = TS.id_tipos WHERE TS.id_tipos = ?";
-            //   $stmt_salas = mysqli_stmt_init($conn);
-            //   mysqli_stmt_prepare($stmt_salas, $sql_salas);
-            //   mysqli_stmt_bind_param($stmt_salas, "i", $id_tipos);
-            //   mysqli_stmt_execute($stmt_salas);
-
-            //   $result_tipos_sala = mysqli_stmt_get_result($stmt_salas);
-
-            //   if (mysqli_num_rows($result_tipos_sala) == 0) {
-            //     mysqli_close($conn);
-            //     echo "no";
-            //   }
-
-            // } catch (Exception $e) {
-            //   echo "Error in the database connection" . $e->getMessage();
-            //   mysqli_close($conn);
-            //   die();
-            // }
-            // foreach ($result_tipos_sala as $row) {
-            //   $num_sala = $row['nombre_sala'];
-            //   $id_sala = $row['id_tipos'];
-            //   echo '<option value=' . $num_sala . '>' . $num_sala . $id_tipos . '</option>';
-            // }
-            ?>
           </select>
         </div>
-
         <div class="dropdown">
           <label for="dropdown3">Mesa</label>
           <div class="dropdown">
@@ -197,8 +172,43 @@ include("./connection.php");
         </div>
       </div>
     </div>
-</body>
 
+
+
+
+
+<!-- Agrega el script de JavaScript -->
+<script>
+
+  // Cuando se cambia la selección en el primer dropdown
+  $('#dropdown1').on('change', function() {
+    // Obtén el valor seleccionado del primer dropdown
+    var selectedTipoSala = $(this).val();
+    console.log('Tipo de Sala seleccionado:', selectedTipoSala);
+    // Realiza una solicitud AJAX para obtener los números de sala correspondientes al tipo de sala seleccionado
+    $.ajax({
+      url: './ajax/numero_sala.php', // Debes crear este archivo para manejar la lógica de la base de datos
+      type: 'GET',
+      data: { tipo_sala: selectedTipoSala },
+      success: function(data) {
+        // Limpia el segundo dropdown
+        $('#dropdown2').empty();
+        // Agrega las nuevas opciones al segundo dropdown
+        $('#dropdown2').html(data);
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  });
+    // Prevenir la recarga del formulario al hacer clic en "filtrar"
+    
+    $('#nocargar').on('submit', function(event) {
+    event.preventDefault();
+  });
+</script>
+
+</body>
 </html>
 <?php
 // }
