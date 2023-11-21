@@ -36,6 +36,7 @@
       <h2> </h2>
       <!-- Botón cerrar sesión -->
     </div>
+    <!-- Contenedor filtros -->
     <div class="container-dropdown">
       <div class="dropdown">
         <label for="dropdown1">Sala</label>
@@ -83,7 +84,7 @@
           ?>
         </select>
       </div>
-      <!-- Contenedor filtros -->
+      <!-- EJEMPLO PARA PODER VER COMO QUEDARÍA-->
       <div class="dropdown">
         <label for="dropdown1">Sala</label>
         <select id="dropdown1">
@@ -161,7 +162,8 @@
         
         // }
         ?>
-        <div class="mesa" onclick="seleccionarMesa(1)">
+        <!-- EJEMPLO PARA PODER VER COMO QUEDARÍA-->
+        <div class="mesa">
           <button type="button" class="btn btn-success boton-redondo" onclick="realizarAccion(1)">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
               class="bi bi-check-square-fill" viewBox="0 0 16 16">
@@ -172,7 +174,7 @@
           <a class="tipo-mesa">4</a>
           <a class="nombre-mesa">comedor2-mesa1</a>
         </div>
-        <div class="mesa" onclick="seleccionarMesa(2)">
+        <div class="mesa">
           <button type="button" class="btn btn-success boton-redondo" onclick="realizarAccion(1)">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
               class="bi bi-check-square-fill" viewBox="0 0 16 16">
