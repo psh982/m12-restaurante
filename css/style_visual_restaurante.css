@@ -12,12 +12,16 @@
     margin: 20px;
   }
 
-  .mesa {
+  .titulo-restaurante {
+        padding: 10px;
+  }
+
+.mesa {
     position: relative;
     width: 160px;
     height: 160px;
-    background-color: #ffffff;
-    border: 3px solid #000000;
+    background-color: #c9acac;
+    border: 3px solid #563d3d;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -25,7 +29,16 @@
     color: #ffffff;
     font-weight: bold;
     cursor: pointer;
-  }
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 15px; /* Añadir margen para separar las mesas */
+    transition: background-color 0.3s ease;
+}
+
+.mesa:hover {
+    background-color: #8c6d6d; /* Cambiar color al pasar el ratón */
+}
 
   .boton-redondo {
     position: absolute;
@@ -51,7 +64,7 @@
   .nombre-mesa {
     position: absolute;
     top: calc(100% - 40px);
-    left: calc(100% - 90px);
+    left: calc(100% - 145px);
     color: #000000;
     font-size: 16px;
     text-decoration: none;
@@ -66,15 +79,71 @@
   }
 
   .container-mapa-mesas {
-    display: block;
-    border: 3px solid #000000;
-    overflow: hidden;
-    margin: 20px;
-    background-color: rgba(123, 82, 50, 0.449);
+    display: flex;
+    align-items: center;
+    background-color: #d8d4d4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
   }
 
   .container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
+  }
+
+  /* ESTILO FILTROS */
+  .container-dropdown {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .container-dropdown {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .dropdown {
+    margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  label {
+    display: flex;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .btn-enviar {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-enviar:hover {
+    background-color: #45a049;
   }
