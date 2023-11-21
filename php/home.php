@@ -7,6 +7,9 @@ if (!isset($_SESSION["user"])) {
 }
 ?>
 
+
+
+
 <form action="./mesa/ocupada.php" method="get">
 <button id="btnActualizarMesa" class="rojo" name="id_mesa" value="2">Mesa</button>
 </form>
