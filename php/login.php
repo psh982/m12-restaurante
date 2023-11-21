@@ -11,8 +11,7 @@ if (!isset($_POST['login'])) {
 } else {
     $user = mysqli_real_escape_string($conn, $_POST['user']);
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
-
-    $sql = "SELECT * FROM tbl_users WHERE id_users = ?";
+    $sql = "SELECT * FROM tbl_users WHERE user = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "s", $user);
     mysqli_stmt_execute($stmt);
@@ -20,9 +19,9 @@ if (!isset($_POST['login'])) {
 
     if (mysqli_num_rows($result) == 1) {
         $login = mysqli_fetch_assoc($result);
-        $enc_pwd = $login['contra'];
+        echo $enc_pwd = $login['contra'];
         if (password_verify($pwd, $enc_pwd)) {
-            $_SESSION['id_user'] = $id_user;
+            $_SESSION['id_user'] = $login['id_user'];
             $_SESSION['user'] = $user;
             header('Location: ./home.php');
         } else {

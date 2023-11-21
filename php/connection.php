@@ -1,2 +1,2 @@
 <?php
-$conn = mysqli_connect("localhost", "root","","db_restaurante");
+$conn = mysqli_connect("localhost","root","","db_restaurante");
