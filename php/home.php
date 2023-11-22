@@ -20,7 +20,9 @@ include("./connection.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Link de Ajax -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!------------------>
     <title>Mapa de Mesas - Restaurante</title>
     <script>
         function seleccionarMesa(numeroMesa) {
@@ -179,32 +181,51 @@ include("./connection.php");
 
 <!-- Agrega el script de JavaScript -->
 <script>
-
-  // Cuando se cambia la selección en el primer dropdown
-  $('#dropdown1').on('change', function() {
-    // Obtén el valor seleccionado del primer dropdown
-    var selectedTipoSala = $(this).val();
-    console.log('Tipo de Sala seleccionado:', selectedTipoSala);
-    // Realiza una solicitud AJAX para obtener los números de sala correspondientes al tipo de sala seleccionado
-    $.ajax({
-      url: './ajax/numero_sala.php', // Debes crear este archivo para manejar la lógica de la base de datos
-      type: 'GET',
-      data: { tipo_sala: selectedTipoSala },
-      success: function(data) {
-        // Limpia el segundo dropdown
-        $('#dropdown2').empty();
-        // Agrega las nuevas opciones al segundo dropdown
-        $('#dropdown2').html(data);
-      },
-      error: function(error) {
-        console.log(error);
-      }
+  /* Esto es como el Transitorio del php para que no manipule cosas antes de que acabe de cargar el html */
+  $(document).ready(function() {
+    // Cuando se cambia la selección en el primer dropdown
+    $('#dropdown1').on('change', function() {
+      // Obtén el valor seleccionado del primer dropdown
+      var selectedTipoSala = $(this).val();
+      // Realiza una solicitud AJAX para obtener los números de sala correspondientes al tipo de sala seleccionado
+      $.ajax({
+        url: './ajax/numero_sala.php',
+        type: 'GET',
+        data: { tipo_sala: selectedTipoSala },
+        success: function(data) {
+          // Limpia el segundo dropdown
+          $('#dropdown2').empty();
+          // Agrega las nuevas opciones al segundo dropdown
+          $('#dropdown2').html(data);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
     });
-  });
-    // Prevenir la recarga del formulario al hacer clic en "filtrar"
-    
+
+    // Manejar el envío del formulario mediante AJAX
     $('#nocargar').on('submit', function(event) {
-    event.preventDefault();
+      // Prevenir la recarga del formulario al hacer clic en "filtrar"
+      event.preventDefault();
+
+      // Obtener los datos del formulario
+      var formData = $(this).serialize();
+
+      // Realizar una solicitud AJAX para enviar los datos del formulario al servidor
+      $.ajax({
+        url: './ajax/proc_form.php', // Reemplaza con la ruta correcta
+        type: 'GET',
+        data: formData,
+        success: function(response) {
+          // Manejar la respuesta del servidor si es necesario
+          console.log(response);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    });
   });
 </script>
 
