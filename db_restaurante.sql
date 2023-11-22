@@ -148,40 +148,47 @@ INSERT INTO tbl_mesas VALUES (20, 'Mesa_20', 4, 2, NULL, 3);
 INSERT INTO tbl_mesas VALUES (21, 'Mesa_21', 4, 2, NULL, 3);
 INSERT INTO tbl_mesas VALUES (22, 'Mesa_22', 4, 2, NULL, 3);
 /*_________________________________ Mesas del comedor _________________________________*/
+
+/* Mesas de comdeor1 de 2 personas */
+INSERT INTO tbl_mesas VALUES (23, 'Mesa_23', 2, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (24, 'Mesa_24', 2, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (25, 'Mesa_25', 2, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (26, 'Mesa_26', 2, 2, NULL, 4);
 /* Mesas de comedor1 de 4 personas */
-INSERT INTO tbl_mesas VALUES (23, 'Mesa_23', 4, 2, NULL, 4);
-INSERT INTO tbl_mesas VALUES (24, 'Mesa_24', 4, 2, NULL, 4);
-INSERT INTO tbl_mesas VALUES (25, 'Mesa_25', 4, 2, NULL, 4);
-INSERT INTO tbl_mesas VALUES (26, 'Mesa_26', 4, 2, NULL, 4);
 INSERT INTO tbl_mesas VALUES (27, 'Mesa_27', 4, 2, NULL, 4);
 INSERT INTO tbl_mesas VALUES (28, 'Mesa_28', 4, 2, NULL, 4);
 INSERT INTO tbl_mesas VALUES (29, 'Mesa_29', 4, 2, NULL, 4);
 INSERT INTO tbl_mesas VALUES (30, 'Mesa_30', 4, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (31, 'Mesa_31', 4, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (32, 'Mesa_32', 4, 2, NULL, 4);
 /* Mesas de comedor1 de 6 personas */
-INSERT INTO tbl_mesas VALUES (31, 'Mesa_31', 6, 2, NULL, 4);
-INSERT INTO tbl_mesas VALUES (32, 'Mesa_32', 6, 2, NULL, 4);
 INSERT INTO tbl_mesas VALUES (33, 'Mesa_33', 6, 2, NULL, 4);
 INSERT INTO tbl_mesas VALUES (34, 'Mesa_34', 6, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (35, 'Mesa_35', 6, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (36, 'Mesa_36', 6, 2, NULL, 4);
 /* Mesas de comedor1 de 8 personas */
-INSERT INTO tbl_mesas VALUES (35, 'Mesa_35', 8, 2, NULL, 4);
-INSERT INTO tbl_mesas VALUES (36, 'Mesa_36', 8, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (37, 'Mesa_37', 8, 2, NULL, 4);
+INSERT INTO tbl_mesas VALUES (38, 'Mesa_38', 8, 2, NULL, 4);
 
+/* Mesas de comdeor1 de 2 personas */
+INSERT INTO tbl_mesas VALUES (39, 'Mesa_39', 2, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (40, 'Mesa_40', 2, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (41, 'Mesa_41', 2, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (42, 'Mesa_42', 2, 2, NULL, 5);
 /* Mesas de comedor2 de 4 personas */
-INSERT INTO tbl_mesas VALUES (37, 'Mesa_37', 4, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (38, 'Mesa_38', 4, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (39, 'Mesa_39', 4, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (40, 'Mesa_40', 4, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (41, 'Mesa_41', 4, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (42, 'Mesa_42', 4, 2, NULL, 5);
 INSERT INTO tbl_mesas VALUES (43, 'Mesa_43', 4, 2, NULL, 5);
 INSERT INTO tbl_mesas VALUES (44, 'Mesa_44', 4, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (45, 'Mesa_45', 4, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (46, 'Mesa_46', 4, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (47, 'Mesa_47', 4, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (48, 'Mesa_48', 4, 2, NULL, 5);
 /* Mesas de comedor2 de 6 personas */
-INSERT INTO tbl_mesas VALUES (45, 'Mesa_45', 6, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (46, 'Mesa_46', 6, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (47, 'Mesa_47', 6, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (48, 'Mesa_48', 6, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (49, 'Mesa_49', 6, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (50, 'Mesa_50', 6, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (51, 'Mesa_51', 6, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (52, 'Mesa_52', 6, 2, NULL, 5);
 /* Mesas de comedor2 de 8 personas */
-INSERT INTO tbl_mesas VALUES (49, 'Mesa_49', 8, 2, NULL, 5);
-INSERT INTO tbl_mesas VALUES (50, 'Mesa_50', 8, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (53, 'Mesa_53', 8, 2, NULL, 5);
+INSERT INTO tbl_mesas VALUES (54, 'Mesa_54', 8, 2, NULL, 5);
 
 
