@@ -78,16 +78,21 @@ ADD CONSTRAINT fk_mesas_estado
 FOREIGN KEY (id_estado_mesa)
 REFERENCES tbl_estado(id_estado);
 
-CREATE TABLE tbl_historial(
+CREATE TABLE tbl_historial (
     id_historial INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
     id_mesa INT NOT NULL,
     id_sala INT NOT NULL,
     fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES tbl_users(id_user),
     FOREIGN KEY (id_mesa) REFERENCES tbl_mesas(id_mesa),
     FOREIGN KEY (id_sala) REFERENCES tbl_salas(id_sala)
 );
+ALTER TABLE tbl_historial
+ADD CONSTRAINT fk_historial_estado
+FOREIGN KEY (estado)
+REFERENCES tbl_estado(id_estado);
 /*_________________________________ Roles _________________________________*/
 INSERT INTO tbl_roles VALUES (1,'admin');
 INSERT INTO tbl_roles VALUES (2,'camarero');
